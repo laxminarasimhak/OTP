@@ -1,11 +1,21 @@
+import os
+import math
 import random
-gen=random.randint(000000,100000)
-username=input('Enter the username:')
-print('hello',username)
-print('Here is your OTP:',gen)
-password=input("Enter the otp to login:")
-if password==str(gen):
-    print('Login success')
+import smtplib
+
+digits="0123456789"
+OTP=""
+for i in range(6):
+    OTP+=digits[math.floor(random.random()*10)]
+otp = OTP + " is your OTP"
+msg= otp
+s = smtplib.SMTP('smtp.gmail.com', 587)
+s.starttls()
+s.login("Your Gmail Account", "You app password")
+emailid = input("Enter your email: ")
+s.sendmail('&&&&&&&&&&&',emailid,msg)
+a = input("Enter Your OTP >>: ")
+if a == OTP:
+    print("Verified")
 else:
-    password!=str(gen)
-    print('login failed')
+    print("Please Check your OTP again")
